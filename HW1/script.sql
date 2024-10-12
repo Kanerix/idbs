@@ -146,12 +146,34 @@ AS subquery;
  */
 
 -- Example
-SELECT COUNT(*) FROM involved i
-JOIN person p ON i.personid = p.id
-JOIN movie m ON i.movieid = m.id
-WHERE m."year" BETWEEN 2000 AND 2010
+SELECT COUNT(*)
+FROM (
+    SELECT i1.personId AS actor1, i2.personId AS actor2, COUNT(*) AS movie_count
+    FROM involved i1
+    JOIN involved i2 ON i1.movieId = i2.movieId AND i1.personId < i2.personId
+    JOIN movie M ON I1.movieId = M.id
+    WHERE i1.role = 'actor'
+        AND i2.role = 'actor'
+        AND m.year BETWEEN 2000 AND 2010
+    GROUP BY i1.personId, i2.personId
+    HAVING COUNT(*) = 10
+)
+AS subquery;
 
 -- Correct
+SELECT COUNT(*)
+FROM (
+    SELECT i1.personId AS actor1, i2.personId AS actor2, COUNT(*) AS movie_count
+    FROM involved i1
+    JOIN involved i2 ON i1.movieId = i2.movieId AND i1.personId < i2.personId
+    JOIN movie m ON i1.movieId = m.id
+    WHERE i1.role = 'actor'
+        AND i2.role = 'actor'
+        AND m.year BETWEEN 2000 AND 2010
+    GROUP BY i1.personId, i2.personId
+    HAVING COUNT(*) = 20
+)
+AS subquery;
 
 /*
  * Question 7
@@ -170,7 +192,7 @@ FROM (
 	JOIN movie m ON i.movieid = m.id
 	WHERE m."year" BETWEEN 2000 AND 2002
 	GROUP BY m.id
-	HAVING COUNT(DISTINCT i."role") = (SELECT COUNT(*) FROM ROLE)
+	HAVING COUNT(DISTINCT i."role") = (SELECT COUNT(*) FROM role)
 )
 AS subquery;
 
