@@ -1,7 +1,0 @@
-CREATE TABLE person(
-    ID INT PRIMARY KEY
-)
-
-CREATE TABLE guide(
-    ID INT PRIMARY KEY REFERENCES person(ID)
-)
