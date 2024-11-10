@@ -3,8 +3,8 @@ CREATE TABLE rentals(
     hid INT -- House ID
     s YEAR -- Start Year?
     PRIMARY KEY (pid, hid)
-    FOREIGN KEY (pid) REFERENCES person(pid)
-    FOREIGN KEY (hid) REFERENCES house(hid)
+    FOREIGN KEY (pid) REFERENCES rentals_person(pid)
+    FOREIGN KEY (hid) REFERENCES rentals_house(hid)
 )
 
 CREATE TABLE rentals_person(
