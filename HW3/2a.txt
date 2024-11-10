@@ -1,0 +1,5 @@
+rental: pid --> pn
+rental: hid --> hs
+rental: hid --> hz
+rental: hid --> hc
+rental: hz --> hc

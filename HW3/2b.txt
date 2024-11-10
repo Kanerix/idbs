@@ -1,0 +1,5 @@
+Rentals(pid, pn)
+Rentals(hid, hs)
+Rentals(hid, hz)
+Rentals(hid, hc)
+Rentals(hz, hc)
